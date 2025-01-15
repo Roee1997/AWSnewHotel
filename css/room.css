@@ -1,0 +1,26 @@
+.room-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* כל האלמנטים מתחילים מהחלק העליון */
+    height: 100%; /* גובה אחיד */
+}
+
+.room-item h5 {
+    margin: 0; /* כותרת מיושרת למעלה */
+    font-size: 1.25rem; /* גודל כותרת אחיד */
+}
+
+.room-item .p-4 {
+    flex-grow: 1; /* שאר התוכן יתפרש לגובה הזמין */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* מתחיל מלמעלה */
+}
+
+.room-item .d-flex.justify-content-between {
+    margin-top: auto; /* ממקם את האלמנטים לתחתית הכרטיס */
+}
+
+.container-fluid.page-header-inner.py-5 {
+    margin-bottom: 150px; /* הרווח הרצוי */
+}
