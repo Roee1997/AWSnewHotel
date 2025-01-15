@@ -514,3 +514,9 @@
 .nav-item button:hover {
     background-color: darken(var(--primary), 10%);
 }
+
+.nav-link.active,
+.dropdown-item.active {
+    color: #FEA116 !important; /* צבע כתום */
+    font-weight: bold;
+}

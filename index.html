@@ -14,7 +14,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -35,7 +37,8 @@
 <body>
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -43,47 +46,7 @@
         <!-- Spinner End -->
 
         <!-- Header Start -->
-        <div class="container-fluid bg-dark px-0">
-            <div class="row gx-0">
-                <div class="col-lg-3 bg-dark d-none d-lg-block">
-                    <a href="index.html" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                        <h1 class="m-0 text-primary text-uppercase">Hotelier</h1>
-                    </a>
-                </div>
-                <div class="col-lg-9">
-
-                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
-                        <a href="index.html" class="navbar-brand d-block d-lg-none">
-                            <h1 class="m-0 text-primary text-uppercase">Hotelier</h1>
-                        </a>
-                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="index.html" class="nav-item nav-link active">Home</a>
-                                <a href="about.html" class="nav-item nav-link">About</a>
-                                <a href="room.html" class="nav-item nav-link">Rooms</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                    <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="booking.html" class="dropdown-item">Booking</a>
-                                        <a href="team.html" class="dropdown-item">Our Team</a>
-                                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                    </div>
-                                </div>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                                <div id="authContainer" class="navbar-nav ms-auto"></div>
-
-                                
-                                
-                            </div>
-                            
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <header></header>
         <!-- Header End -->
 
 
@@ -95,8 +58,10 @@
                         <img class="w-100" src="img/carousel-1.jpg" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
+                                <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury
+                                    Living</h6>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious
+                                    Hotel</h1>
 
                             </div>
                         </div>
@@ -105,8 +70,10 @@
                         <img class="w-100" src="img/carousel-2.jpg" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
+                                <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury
+                                    Living</h6>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious
+                                    Hotel</h1>
                             </div>
                         </div>
                     </div>
@@ -126,50 +93,7 @@
         <!-- Carousel End -->
 
 
-        <!-- Booking Start -->
-        <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="bg-white shadow" style="padding: 35px;">
-                    <div class="row g-2">
-                        <div class="col-md-10">
-                            <div class="row g-2">
-                                <div class="col-md-3">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input"
-                                            placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="date" id="date2" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Adult</option>
-                                        <option value="1">Adult 1</option>
-                                        <option value="2">Adult 2</option>
-                                        <option value="3">Adult 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Child</option>
-                                        <option value="1">Child 1</option>
-                                        <option value="2">Child 2</option>
-                                        <option value="3">Child 3</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary w-100">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Booking End -->
+
 
 
         <!-- About Start -->
@@ -179,7 +103,9 @@
                     <div class="col-lg-6">
                         <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
                         <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">Hotelier</span></h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
+                            diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna
+                            dolore erat amet</p>
                         <div class="row g-3 pb-4">
                             <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                                 <div class="border rounded p-1">
@@ -214,16 +140,20 @@
                     <div class="col-lg-6">
                         <div class="row g-3">
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="img/about-1.jpg" style="margin-top: 25%;">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s"
+                                    src="img/about-1.jpg" style="margin-top: 25%;">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="img/about-2.jpg">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s"
+                                    src="img/about-2.jpg">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="img/about-3.jpg">
+                                <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s"
+                                    src="img/about-3.jpg">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="img/about-4.jpg">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s"
+                                    src="img/about-4.jpg">
                             </div>
                         </div>
                     </div>
@@ -245,7 +175,8 @@
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/room-1.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
+                                <small
+                                    class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
@@ -259,11 +190,14 @@
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3
+                                        Bed</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
+                                        Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos
+                                    lorem sed diam stet diam sed stet lorem.</p>
                                 <div class="d-flex justify-content-between">
                                     <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
@@ -275,7 +209,8 @@
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/room-2.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
+                                <small
+                                    class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
@@ -289,11 +224,14 @@
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3
+                                        Bed</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
+                                        Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos
+                                    lorem sed diam stet diam sed stet lorem.</p>
                                 <div class="d-flex justify-content-between">
                                     <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
@@ -305,7 +243,8 @@
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/room-3.jpg" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
+                                <small
+                                    class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
@@ -319,11 +258,14 @@
                                     </div>
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3
+                                        Bed</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
+                                        Bath</small>
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos
+                                    lorem sed diam stet diam sed stet lorem.</p>
                                 <div class="d-flex justify-content-between">
                                     <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
@@ -337,7 +279,7 @@
         <!-- Room End -->
 
 
-       
+
 
         <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -349,8 +291,8 @@
                     <div class="modal-body">
                         <!-- 16:9 aspect ratio -->
                         <div class="ratio ratio-16x9">
-                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
-                                allow="autoplay"></iframe>
+                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen
+                                allowscriptaccess="always" allow="autoplay"></iframe>
                         </div>
                     </div>
                 </div>
@@ -360,59 +302,71 @@
 
 
         <!-- Service Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title text-center text-primary text-uppercase">Our Services</h6>
-            <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Attractions</span></h1>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title text-center text-primary text-uppercase">Our Services</h6>
+                    <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Attractions</span></h1>
+                </div>
+                <div class="row g-4">
+                    <!-- Arbel Nature Reserve -->
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <a class="service-item rounded" href="https://www.parks.org.il/reserve-park/arbel/"
+                            target="_blank">
+                            <div class="service-icon bg-transparent border rounded p-1">
+                                <div
+                                    class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                    <i class="fa fa-mountain fa-2x text-primary"></i>
+                                </div>
+                            </div>
+                            <h5 class="mb-3">Arbel Nature Reserve</h5>
+                            <p class="text-body mb-0">
+                                The Arbel Cliffs rise above the Sea of Galilee, offering breathtaking views of the Golan
+                                Heights, Mount Hermon, and Galilee mountains. The reserve includes Mount Nitai, Mount
+                                Savyon, Arbel Stream, and remnants of two ancient synagogues.
+                            </p>
+                        </a>
+                    </div>
+                    <!-- Water Sports -->
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                        <a class="service-item rounded"
+                            href="https://www.tripadvisor.co.il/Attraction_Review-g1759678-d9716071-Reviews-Halom_Olami-Migdal_Galilee_Region_Northern_District.html"
+                            target="_blank">
+                            <div class="service-icon bg-transparent border rounded p-1">
+                                <div
+                                    class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                    <i class="fa fa-water fa-2x text-primary"></i>
+                                </div>
+                            </div>
+                            <h5 class="mb-3">Water Sports</h5>
+                            <p class="text-body mb-0">
+                                Enjoy a variety of water sports just a few minutes away. From skiing and jet skiing to
+                                kayaks, banana boats, and SUP, there are endless options for couples, families, and
+                                groups of all sizes.
+                            </p>
+                        </a>
+                    </div>
+                    <!-- Off-Road Tours -->
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <a class="service-item rounded"
+                            href="http://www.tracktoronim4u.co.il/he/cards/city.asp?cityID=5" target="_blank">
+                            <div class="service-icon bg-transparent border rounded p-1">
+                                <div
+                                    class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                    <i class="fa fa-car fa-2x text-primary"></i>
+                                </div>
+                            </div>
+                            <h5 class="mb-3">Off-Road Tours</h5>
+                            <p class="text-body mb-0">
+                                For adrenaline seekers, off-road tours offer the ultimate adventure. Explore winding
+                                trails, muddy paths, and steep climbs with razors, ATVs, jeeps, and more.
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row g-4">
-            <!-- Arbel Nature Reserve -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <a class="service-item rounded" href="https://www.parks.org.il/reserve-park/arbel/" target="_blank">
-                    <div class="service-icon bg-transparent border rounded p-1">
-                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                            <i class="fa fa-mountain fa-2x text-primary"></i>
-                        </div>
-                    </div>
-                    <h5 class="mb-3">Arbel Nature Reserve</h5>
-                    <p class="text-body mb-0">
-                        The Arbel Cliffs rise above the Sea of Galilee, offering breathtaking views of the Golan Heights, Mount Hermon, and Galilee mountains. The reserve includes Mount Nitai, Mount Savyon, Arbel Stream, and remnants of two ancient synagogues.
-                    </p>
-                </a>
-            </div>
-            <!-- Water Sports -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                <a class="service-item rounded" href="https://www.tripadvisor.co.il/Attraction_Review-g1759678-d9716071-Reviews-Halom_Olami-Migdal_Galilee_Region_Northern_District.html" target="_blank">
-                    <div class="service-icon bg-transparent border rounded p-1">
-                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                            <i class="fa fa-water fa-2x text-primary"></i>
-                        </div>
-                    </div>
-                    <h5 class="mb-3">Water Sports</h5>
-                    <p class="text-body mb-0">
-                        Enjoy a variety of water sports just a few minutes away. From skiing and jet skiing to kayaks, banana boats, and SUP, there are endless options for couples, families, and groups of all sizes.
-                    </p>
-                </a>
-            </div>
-            <!-- Off-Road Tours -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <a class="service-item rounded" href="http://www.tracktoronim4u.co.il/he/cards/city.asp?cityID=5" target="_blank">
-                    <div class="service-icon bg-transparent border rounded p-1">
-                        <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                            <i class="fa fa-car fa-2x text-primary"></i>
-                        </div>
-                    </div>
-                    <h5 class="mb-3">Off-Road Tours</h5>
-                    <p class="text-body mb-0">
-                        For adrenaline seekers, off-road tours offer the ultimate adventure. Explore winding trails, muddy paths, and steep climbs with razors, ATVs, jeeps, and more.
-                    </p>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Service End -->
+        <!-- Service End -->
 
 
 
@@ -421,9 +375,11 @@
             <div class="container">
                 <div class="owl-carousel testimonial-carousel py-5">
                     <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd et erat magna eos</p>
+                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet
+                            diam stet. Est stet ea lorem amet est kasd kasd et erat magna eos</p>
                         <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 45px; height: 45px;">
+                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg"
+                                style="width: 45px; height: 45px;">
                             <div class="ps-3">
                                 <h6 class="fw-bold mb-1">Client Name</h6>
                                 <small>Profession</small>
@@ -432,9 +388,11 @@
                         <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
                     </div>
                     <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd et erat magna eos</p>
+                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet
+                            diam stet. Est stet ea lorem amet est kasd kasd et erat magna eos</p>
                         <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg" style="width: 45px; height: 45px;">
+                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg"
+                                style="width: 45px; height: 45px;">
                             <div class="ps-3">
                                 <h6 class="fw-bold mb-1">Client Name</h6>
                                 <small>Profession</small>
@@ -443,9 +401,11 @@
                         <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
                     </div>
                     <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd et erat magna eos</p>
+                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet
+                            diam stet. Est stet ea lorem amet est kasd kasd et erat magna eos</p>
                         <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-3.jpg" style="width: 45px; height: 45px;">
+                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-3.jpg"
+                                style="width: 45px; height: 45px;">
                             <div class="ps-3">
                                 <h6 class="fw-bold mb-1">Client Name</h6>
                                 <small>Profession</small>
@@ -471,10 +431,14 @@
                         <div class="rounded shadow overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/team-1.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <div
+                                    class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
@@ -487,10 +451,14 @@
                         <div class="rounded shadow overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/team-2.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <div
+                                    class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
@@ -503,10 +471,14 @@
                         <div class="rounded shadow overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/team-3.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <div
+                                    class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
@@ -519,10 +491,14 @@
                         <div class="rounded shadow overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid" src="img/team-4.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <div
+                                    class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
@@ -543,84 +519,11 @@
             </div>
         </div>
         <!-- Newsletter Start -->
-        
 
-<!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer wow fadeIn" data-wow-delay="0.1s">
-    <div class="container pb-5">
-        <div class="row g-5">
-            <div class="col-md-6 col-lg-3">
-                <div class="bg-primary rounded p-4">
-                    <h4 class="text-white text-uppercase mb-3">On The Lake</h4>
-                    <p class="text-white mb-0">
-                        The place where tranquility, relaxation, and nature meet. "On The Lake" is an apartment hotel
-                        that provides a variety of services alongside a surprising location. "On The Lake" offers the
-                        ultimate relaxing experience for families and couples, while also providing a space for private
-                        events.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="info_detail">
-                    <h4 class="text-primary text-uppercase mb-4">About The Company</h4>
-                    <p class="text-light mb-0">
-                        "TAMAM" is a leading construction company that has delivered successful and extensive projects
-                        across the country. With around 30 years of experience in the construction industry, "TAMAM" is
-                        among the best in the market.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <h4 class="text-primary text-uppercase mb-4">Contact</h4>
-                <div class="info_contact">
-                    <a href="https://www.google.com/maps?q=Migdal+Village" target="_blank" class="d-block mb-2 text-light">
-                        <i class="fa fa-map-marker-alt me-3"></i>
-                        Address: Migdal Village
-                    </a>
-                    <a href="https://waze.com/ul?q=Migdal+Village" target="_blank" class="d-block mb-2 text-light">
-                        <i>
-                            <img src="img/waze-icon.png" alt="Waze" style="width: 20px; height: 20px;">
-                        </i>
-                        Navigate with Waze
-                    </a>
-                    <a href="tel:+972505311443" class="d-block mb-2 text-light">
-                        <i class="fa fa-phone-alt me-3"></i>
-                        Phone: 050-5311443
-                    </a>
-                    <a href="mailto:NadavTamam@info.com" class="d-block text-light">
-                        <i class="fa fa-envelope me-3"></i>
-                        Email: NadavTamam@info.com
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <h4 class="text-primary text-uppercase mb-4">Types of Accommodation</h4>
-                <div class="social_box">
-                    <ul class="list-unstyled text-light">
-                        <li>Country Lodging</li>
-                        <li>Boutique Rooms</li>
-                        <li>Vacation Apartments for Bachelor Parties</li>
-                        <li>Vacation Apartments for Families</li>
-                        <li>Apartments with Private Pools</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
-                            
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Footer End -->
+
+        <!-- Footer Start -->
+        <footer></footer>
+        <!-- Footer End -->
 
 
 
@@ -644,7 +547,9 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script src="js/index.js" defer></script>
+    <script src="js/login.js" defer></script>
+    <script src="js/common.js"></script>
+
 
 </body>
 
