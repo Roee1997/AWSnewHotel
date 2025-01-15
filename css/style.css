@@ -489,3 +489,28 @@
     padding-right: 0;
     border-right: none;
 }
+
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav-item {
+    margin: 0 10px;
+    text-transform: uppercase;
+}
+
+.nav-item button {
+    background-color: var(--primary);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.nav-item button:hover {
+    background-color: darken(var(--primary), 10%);
+}
