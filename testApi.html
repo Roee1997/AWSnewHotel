@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API</title>
+</head>
+<body>
+    <h1>Test API Gateway</h1>
+    <button id="testApi">Test API</button>
+    <p id="response"></p>
+
+    <script>
+        document.getElementById('testApi').addEventListener('click', async () => {
+            // URL של ה-API Gateway
+            const apiUrl = 'https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/bookings';
+
+            // JSON של הבקשה
+            const data = {
+                user_email: "example@example.com",
+                check_in: "2025-01-01",
+                room_id: "R101",
+                check_out: "2025-01-05",
+                additional_requests: "Late check-in",
+                status: "Pending"
+            };
+
+            try {
+                // שליחת הבקשה ל-API
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                // בדיקת התגובה
+                const result = await response.json();
+                console.log('Response:', result);
+
+                // הצגת התוצאה בדף
+                document.getElementById('response').innerText = JSON.stringify(result, null, 2);
+                alert('Response received! Check console for details.');
+            } catch (error) {
+                console.error('Error:', error);
+
+                // הצגת שגיאה בדף
+                document.getElementById('response').innerText = `Error connecting to the API: ${error}`;
+                alert('Error connecting to the API.');
+            }
+        });
+    </script>
+</body>
+</html>
