@@ -61,11 +61,15 @@ const parseTokensFromUrl = () => {
         const idTokenPayload = decodeJwtPayload(idToken);
 
         if (idTokenPayload) {
+            // Check if user is an admin
+            const isAdmin = idTokenPayload["cognito:groups"] && idTokenPayload["cognito:groups"].includes("Admin");
+
             // Save user info in localStorage
             const userInfo = {
                 name: idTokenPayload.name,
                 email: idTokenPayload.email,
                 username: idTokenPayload["cognito:username"],
+                isAdmin: isAdmin || false, // Add isAdmin flag
                 rawIdTokenPayload: idTokenPayload, // Optional: Full decoded ID token payload
             };
 
@@ -104,6 +108,15 @@ const updateUI = () => {
         if (logoutButton) {
             logoutButton.addEventListener('click', logoutUser);
         }
+
+        // Add admin-specific UI if the user is an admin
+        if (userInfo.isAdmin) {
+            const adminLink = document.createElement('a');
+            adminLink.href = 'admin.html';
+            adminLink.textContent = 'Admin Dashboard';
+            adminLink.classList.add('nav-item', 'nav-link', 'text-white');
+            authContainer.appendChild(adminLink);
+        }
     } else {
         // User is not logged in
         authContainer.innerHTML = `
@@ -119,7 +132,6 @@ const updateUI = () => {
         }
     }
 };
-
 
 // Parse tokens on page load
 window.onload = () => {

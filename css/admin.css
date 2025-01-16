@@ -1,0 +1,53 @@
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+overflow: hidden;
+}
+
+.table th,
+.table td {
+vertical-align: middle;
+padding: 12px;
+}
+
+.table th {
+background-color: var(--primary);
+color: #fff;
+font-weight: bold;
+text-transform: uppercase;
+}
+
+.table-hover tbody tr:hover {
+background-color: rgba(254, 161, 22, 0.1); /* Highlight on hover */
+}
+
+.table td {
+color: #333;
+}
+
+.table td:last-child {
+white-space: nowrap;
+}
+
+.btn-sm {
+padding: 6px 12px;
+font-size: 14px;
+text-transform: uppercase;
+}
+
+.table .btn-success {
+background-color: var(--primary);
+border: none;
+}
+
+.table .btn-success:hover {
+background-color: #e8950f;
+}
+
+.table .btn-danger {
+background-color: #d9534f;
+border: none;
+}
+
+.table .btn-danger:hover {
+background-color: #c9302c;
+}
