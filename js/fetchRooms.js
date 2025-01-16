@@ -29,9 +29,11 @@ async function fetchAndDisplayRooms() {
         roomsContainer.innerHTML = "";
 
         // הוספת כרטיס עבור כל חדר מתאים
-        filteredRooms.forEach(room => {
-            const amenitiesList = room.Amenities.map(amenity => `<li>${amenity}</li>`).join(""); // יצירת רשימת מתקנים
-
+        filteredRooms.forEach((room) => {
+            const amenitiesList = room.Amenities.map(
+                (amenity) => `<li>${amenity}</li>`
+            ).join("");
+        
             const roomCard = `
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item shadow rounded overflow-hidden">
@@ -40,29 +42,18 @@ async function fetchAndDisplayRooms() {
                             <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$${room.PricePerNight}/Night</small>
                         </div>
                         <div class="p-4 mt-2">
-                            <div class="d-flex justify-content-between mb-3">
-                                <h5 class="mb-0">${room.RoomType}</h5>
-                                <div class="ps-2">
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                </div>
-                            </div>
-                            <div class="d-flex mb-3">
-                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>${room.MaxGuests} Guests</small>
-                                <small class="border-end me-3 pe-3"><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                                <small><i class="fa fa-bath text-primary me-2"></i>${room.Amenities.length} Amenities</small>
-                            </div>
+                            <h5 class="mb-0">${room.RoomType}</h5>
                             <p class="text-body mb-3">${room.Description}</p>
-                            <div class="mb-3">
-                                <h6 class="text-primary">Amenities:</h6>
-                                <ul>${amenitiesList}</ul>
-                            </div>
+                            <ul>${amenitiesList}</ul>
                             <div class="d-flex justify-content-between">
-                                <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                                <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                                <button 
+                                    class="btn btn-sm btn-primary rounded py-2 px-4 book-now" 
+                                    data-room-id="${room.room_id}"
+                                    data-room-type="${room.RoomType}"
+                                    data-price="${room.PricePerNight}"
+                                    data-max-guests="${room.MaxGuests}">
+                                    Book Now
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -70,6 +61,7 @@ async function fetchAndDisplayRooms() {
             `;
             roomsContainer.innerHTML += roomCard;
         });
+        
 
         // במידה ואין חדרים מתאימים
         if (filteredRooms.length === 0) {
