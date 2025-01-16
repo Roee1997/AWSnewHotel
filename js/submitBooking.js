@@ -5,13 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Gather form data
         const bookingDetails = {
-            user_email: document.querySelector('#email').value,
-            booking_id: `BOOK_${Date.now()}`, // Unique booking ID
-            room_id: document.querySelector('#select3').value,
-            check_in: document.querySelector('#checkin').value,
-            check_out: document.querySelector('#checkout').value,
-            additional_requests: document.querySelector('#message').value,
-            status: 'Pending' // Default status for new bookings
+            user_email: document.querySelector('#email').value, // אימייל המשתמש
+            user_name: document.querySelector('#name').value, // שם המשתמש
+            booking_id: `BOOK_${Date.now()}`, // מזהה ייחודי להזמנה
+            room_id: document.querySelector('#select3').value, // ID של החדר
+            room_type: document.querySelector('#select3 option:checked').textContent, // סוג החדר
+            check_in: document.querySelector('#checkin').value, // תאריך צ'ק-אין
+            check_out: document.querySelector('#checkout').value, // תאריך צ'ק-אאוט
+            guest_count: document.querySelector('#numberOfGuestsBooking').value, // מספר אורחים
+            additional_requests: document.querySelector('#message').value, // בקשות מיוחדות
+            status: 'Pending' // סטטוס ברירת מחדל להזמנה
         };
 
         // Call the API to insert the booking into DynamoDB
@@ -22,17 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(bookingDetails),
-                
             });
-          
-        
-            // הדפסת הסטטוס והתגובה בקונסול
+
+            // Debugging response
             console.log('Response Status:', response.status);
             console.log('Response Headers:', response.headers);
-            const result = await response.text(); // השתמשי ב-text כדי לראות את התגובה המקורית
+            const result = await response.text();
             console.log('Response Body:', result);
-        
-            // בדיקת סטטוס
+
+            // Check response status
             if (response.ok) {
                 alert(`Booking successful! Response: ${result}`);
             } else {
