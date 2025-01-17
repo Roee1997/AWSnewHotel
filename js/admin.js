@@ -1,7 +1,6 @@
+// from here on this part of script works on table bookings:
 document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/bookings"; // URL of the Lambda API
-    
-
     // Fetch bookings from the API
     fetchBookings(apiUrl);
 });
@@ -61,7 +60,7 @@ function populateTable(bookings) {
             <td>${booking.status}</td>
             <td>
                 <button 
-                    class="btn btn-success btn-sm" 
+                    class="btn btn-success btn-sm" style="background-color:green" 
                     onclick="updateBookingStatus('${booking.user_email}', '${booking.booking_id}', 'Approved', '${booking.room_id}')">
                     Approve
                 </button>
@@ -157,3 +156,271 @@ function updateBookingStatus(userEmail, bookingId, newStatus, roomId) {
 }
 
 
+
+
+async function fetchAndDisplayRooms(apiUrl2) {
+    const roomsTableBody = document.querySelector("#roomsTable tbody");
+
+    if (!roomsTableBody) {
+        console.error("Error: Table body element not found!");
+        return;
+    }
+
+    try {
+        // Fetch the room data from the API
+        const response = await fetch(apiUrl2);
+        if (!response.ok) {
+            throw new Error(`Error fetching rooms: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Parse the response body
+        const rooms = JSON.parse(data.body) || [];
+
+        // Clear existing rows
+        roomsTableBody.innerHTML = "";
+
+        if (rooms.length === 0) {
+            roomsTableBody.innerHTML = "<tr><td colspan='7'>No rooms available.</td></tr>";
+            return;
+        }
+
+        // Populate the table with room data
+        rooms.forEach((room) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${room.room_id || "N/A"}</td>
+                <td>${room.RoomType || "N/A"}</td>
+                <td>${room.Description || "N/A"}</td>
+                <td>${room.PricePerNight || "N/A"}</td>
+                <td>${room.MaxGuests || "N/A"}</td>
+                <td>${room.Available ? "Yes" : "No"}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm" onclick="editRoom(${room.room_id})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteRoom(${room.room_id})">Delete</button>
+                </td>
+            `;
+            roomsTableBody.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Error fetching or displaying rooms:", error);
+        roomsTableBody.innerHTML = "<tr><td colspan='7'>Failed to load rooms.</td></tr>";
+    }
+}
+
+function editRoom(roomId) {
+    console.log(`Edit room with ID: ${roomId}`);
+    // Add your logic to edit room details
+}
+
+
+
+
+
+
+
+////////////////////////////////   from here on this part of script works on table rooms:    ////////////////////////////////  
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const roomsApiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+
+    // Fetch and display existing rooms
+    fetchAndDisplayRooms(roomsApiUrl);
+
+    // Add event listener to the Save button in the modal
+    document.getElementById("saveRoomButton").addEventListener("click", handleRoomAdd);
+    console.log("Initialized: Save button bound to handleRoomAdd by default");
+});
+
+// Fetch and display existing rooms in the table
+async function fetchAndDisplayRooms(apiUrl) {
+    const roomsTableBody = document.querySelector("#roomsTable tbody");
+
+    try {
+        console.log("Fetching rooms...");
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`Error fetching rooms: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const rooms = JSON.parse(data.body) || [];
+        console.log("Rooms fetched successfully:", rooms);
+
+        roomsTableBody.innerHTML = rooms.length
+            ? rooms.map(roomToTableRow).join("")
+            : "<tr><td colspan='7'>No rooms available.</td></tr>";
+    } catch (error) {
+        console.error("Error fetching or displaying rooms:", error);
+        roomsTableBody.innerHTML = "<tr><td colspan='7'>Failed to load rooms.</td></tr>";
+    }
+}
+
+// Convert room data to a table row
+function roomToTableRow(room) {
+    return `
+        <tr>
+            <td>${room.room_id || "N/A"}</td>
+            <td>${room.RoomType || "N/A"}</td>
+            <td>${room.Description || "N/A"}</td>
+            <td>${room.PricePerNight || "N/A"}</td>
+            <td>${room.MaxGuests || "N/A"}</td>
+            <td>${room.Available ? "Yes" : "No"}</td>
+            <td>
+                <button class="btn btn-primary btn-sm" onclick="openRoomModal('edit', ${room.room_id})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="handleRoomDelete(${room.room_id})">Delete</button>
+            </td>
+        </tr>
+    `;
+}
+
+// Open the modal for adding or editing a room
+function openRoomModal(action, roomId = null) {
+    console.log(`Opening modal for action: ${action}, roomId: ${roomId}`);
+    const modal = new bootstrap.Modal(document.getElementById("roomModal"));
+    const form = document.getElementById("roomForm");
+
+    form.reset();
+    if (action === "add") {
+        document.getElementById("roomModalLabel").textContent = "Add Room";
+        document.getElementById("saveRoomButton").onclick = handleRoomAdd; // Set Save to Add
+        console.log("Save button bound to handleRoomAdd");
+    } else if (action === "edit") {
+        document.getElementById("roomModalLabel").textContent = "Edit Room";
+        fetchRoomDetails(roomId); // Populate the form with existing room data
+        document.getElementById("saveRoomButton").onclick = () => handleRoomEdit(roomId); // Set Save to Edit
+        console.log("Save button bound to handleRoomEdit");
+    }
+
+    modal.show();
+}
+
+// Handle room addition
+async function handleRoomAdd() {
+    console.log("Handling room addition...");
+    const apiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    const form = document.getElementById("roomForm");
+
+    const roomData = {
+        room_id: parseInt(form.room_id.value),
+        RoomType: form.RoomType.value.trim(),
+        Description: form.Description.value.trim(),
+        PricePerNight: parseFloat(form.PricePerNight.value),
+        MaxGuests: parseInt(form.MaxGuests.value),
+        Available: form.Available.value === "true",
+        Amenities: form.Amenities.value.split(",").map((item) => item.trim()),
+    };
+
+    console.log("Room data to add:", roomData);
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(roomData),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error adding room: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Room added successfully:", result);
+        alert("Room added successfully!");
+
+        fetchAndDisplayRooms(apiUrl);
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById("roomModal"));
+        modal.hide();
+    } catch (error) {
+        console.error("Error adding room:", error);
+        alert("Failed to add room. Please try again.");
+    }
+}
+
+// Fetch room details for editing
+async function fetchRoomDetails(roomId) {
+    const apiUrl = `https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table`;
+
+    try {
+        console.log("Fetching room details for roomId:", roomId);
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`Error fetching room details: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const rooms = JSON.parse(data.body) || [];
+        const room = rooms.find((r) => r.room_id === roomId);
+
+        if (!room) {
+            throw new Error(`Room with ID ${roomId} not found.`);
+        }
+
+        const form = document.getElementById("roomForm");
+        form.room_id.value = room.room_id;
+        form.RoomType.value = room.RoomType;
+        form.Description.value = room.Description;
+        form.PricePerNight.value = room.PricePerNight;
+        form.MaxGuests.value = room.MaxGuests;
+        form.Available.value = room.Available ? "true" : "false";
+        form.Amenities.value = room.Amenities.join(", ");
+        console.log("Room details populated in form:", room);
+    } catch (error) {
+        console.error("Error fetching room details:", error);
+        alert("Failed to fetch room details. Please try again.");
+    }
+}
+
+// Handle room editing
+async function handleRoomEdit(roomId) {
+    console.log("Handling room edit for roomId:", roomId);
+    const apiUrl = `https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table/${roomId}`;
+    const form = document.getElementById("roomForm");
+
+    const roomData = {
+        room_id: 101, // מספר ID לחדר
+        RoomType: "Executive Suite", // סוג החדר
+        Description: "A luxurious suite with city view and modern amenities", // תיאור
+        PricePerNight: 2500.0, // מחיר ללילה
+        MaxGuests: 4, // כמות אורחים מקסימלית
+        Available: true, // זמינות
+        Amenities: ["Wi-Fi", "TV", "Mini Bar", "Jacuzzi"], // רשימת תכונות
+    };
+
+
+    console.log("Room data to update:", roomData);
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(roomData),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error updating room: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Room updated successfully:", result);
+        alert("Room updated successfully!");
+
+        fetchAndDisplayRooms("https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table");
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById("roomModal"));
+        modal.hide();
+    } catch (error) {
+        console.log(apiUrl);
+        console.error("Error updating room:", error);
+        alert("Failed to update room. Please try again.");
+    }
+}

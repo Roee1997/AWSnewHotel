@@ -86,8 +86,10 @@
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h1 class="mb-5 text-uppercase">Admin Dashboard</h1>
+                    <h2 class="text-center mb-4">Manage bookings</h2>
                 </div>
-                <div class="table-responsive wow fadeInUp" data-wow-delay="0.3s">
+                <div class="table-responsive wow fadeInUp" data-wow-delay="0.3s"
+                    style="height: 800px; overflow-y: auto;">
                     <table class="table table-hover table-bordered text-center align-middle">
                         <thead class="table-dark">
                             <tr>
@@ -114,6 +116,84 @@
                 </div>
             </div>
         </div>
+
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Manage Rooms</h2>
+            <button class="btn btn-primary mb-3" onclick="openRoomModal('add')">Add Room</button>
+            <div class="table-responsive" style="height: 800px; overflow-y: auto;">
+                <table class="table table-bordered" id="roomsTable">
+                    <thead>
+                        <tr>
+                            <th>Room ID</th>
+                            <th>Room Type</th>
+                            <th>Description</th>
+                            <th>Price Per Night</th>
+                            <th>Max Guests</th>
+                            <th>Available</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be dynamically injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Room Modal -->
+        <div class="modal fade" id="roomModal" tabindex="-1" aria-labelledby="roomModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="roomForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="roomModalLabel">Add Room</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="room_id" class="form-label">Room ID</label>
+                                <input type="number" class="form-control" id="room_id" name="room_id" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="RoomType" class="form-label">Room Type</label>
+                                <input type="text" class="form-control" id="RoomType" name="RoomType" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Description" class="form-label">Description</label>
+                                <textarea class="form-control" id="Description" name="Description" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="PricePerNight" class="form-label">Price Per Night</label>
+                                <input type="number" step="0.01" class="form-control" id="PricePerNight" name="PricePerNight" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="MaxGuests" class="form-label">Max Guests</label>
+                                <input type="number" class="form-control" id="MaxGuests" name="MaxGuests" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Available" class="form-label">Available</label>
+                                <select class="form-select" id="Available" name="Available" required>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Amenities" class="form-label">Amenities (comma-separated)</label>
+                                <input type="text" class="form-control" id="Amenities" name="Amenities" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="saveRoomButton">Save Room</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        
+
+
         <!-- Admin Dashboard End -->
 
 
