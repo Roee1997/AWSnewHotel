@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/bookings"; // URL of the Lambda API
+    
 
     // Fetch bookings from the API
     fetchBookings(apiUrl);
@@ -59,21 +60,100 @@ function populateTable(bookings) {
             <td>${booking.additional_requests || "None"}</td>
             <td>${booking.status}</td>
             <td>
-                <button class="btn btn-success btn-sm" onclick="approveBooking('${booking.booking_id}')">Approve</button>
-                <button class="btn btn-danger btn-sm" onclick="denyBooking('${booking.booking_id}')">Deny</button>
+                <button 
+                    class="btn btn-success btn-sm" 
+                    onclick="updateBookingStatus('${booking.user_email}', '${booking.booking_id}', 'Approved', '${booking.room_id}')">
+                    Approve
+                </button>
+                <button 
+                    class="btn btn-danger btn-sm" 
+                    onclick="updateBookingStatus('${booking.user_email}', '${booking.booking_id}', 'Deny', '${booking.room_id}')">
+                    Deny
+                </button>
             </td>
         `;
         tableBody.appendChild(row);
     });
 }
 
-// Functions to approve or deny a booking
-function approveBooking(bookingId) {
-    alert(`Booking ${bookingId} approved!`);
-    // Add API call to update status here
+
+function updateBookingStatus(userEmail, bookingId, newStatus, roomId) {
+    const updateStatusUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/updating-status";
+    const updateAvailabilityUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/update-room-availability";
+
+    // Prepare the payload for status update
+    const statusPayload = {
+        body: JSON.stringify({
+            user_email: userEmail,
+            booking_id: bookingId,
+            status: newStatus
+        })
+    };
+
+    // Send POST request to update booking status
+    fetch(updateStatusUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(statusPayload)
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log(`Booking status updated: ${JSON.stringify(data)}`);
+            alert(`Booking status updated to "${newStatus}" for Booking ID: ${bookingId}`);
+
+            // Update the table row without reloading
+            const tableBody = document.querySelector('#bookingsTable');
+            if (tableBody) {
+                const rows = tableBody.querySelectorAll('tr');
+                rows.forEach((row) => {
+                    const bookingIdCell = row.querySelector('td:nth-child(2)'); // Column with Booking ID
+                    if (bookingIdCell && bookingIdCell.textContent === bookingId) {
+                        const statusCell = row.querySelector('td:nth-child(11)'); // Column with status
+                        if (statusCell) {
+                            statusCell.textContent = newStatus; // Update the status text
+                        }
+                    }
+                });
+            }
+
+            // Prepare payload for room availability update
+            const availabilityPayload = {
+                body: JSON.stringify({
+                    room_id: roomId,
+                    available: newStatus === 'Deny' // Available = true if Deny, false otherwise
+                })
+            };
+
+            // Send POST request to update room availability
+            return fetch(updateAvailabilityUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(availabilityPayload)
+            });
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log(`Room availability updated: ${JSON.stringify(data)}`);
+            alert(`Room availability updated for Room ID: ${roomId}`);
+        })
+        .catch((error) => {
+            console.error("Error updating booking status or room availability:", error);
+            alert("Error updating booking status or room availability. Please try again.");
+        });
 }
 
-function denyBooking(bookingId) {
-    alert(`Booking ${bookingId} denied!`);
-    // Add API call to update status here
-}
+
