@@ -1,5 +1,5 @@
 // כתובת ה-API
-const apiURL = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/rooms";
+const apiURL = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev";
 
 // אלמנט שמכיל את כרטיסי החדרים
 const roomsContainer = document.querySelector(".container-xxl.py-5 .row.g-4");
