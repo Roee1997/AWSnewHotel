@@ -22,7 +22,7 @@ async function fetchAndDisplayRooms(apiUrl) {
 
         const data = await response.json();
         const rooms = JSON.parse(data.body) || [];
-
+        rooms.sort((a, b) => a.room_id - b.room_id); // Ensure sorting
         roomsTableBody.innerHTML = rooms.length
             ? rooms.map(roomToTableRow).join("")
             : "<tr><td colspan='7'>No rooms available.</td></tr>";
@@ -104,7 +104,7 @@ function openRoomModal(action, roomId = null) {
         newSaveButton.onclick = handleRoomAdd; // Bind to handleRoomAdd
     } else if (action === "edit") {
         modalTitle.textContent = "Edit Room";
-        form.room_id.disabled = true;
+        form.room_id.disabled = false;
         fetchRoomDetails(roomId); // Load the room details into the form
         newSaveButton.onclick = () => handleRoomEdit(roomId); // Bind to handleRoomEdit
     }
