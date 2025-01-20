@@ -5,7 +5,6 @@ document.addEventListener("click", (e) => {
         // בדיקת חיבור המשתמש
         if (!userInfo || !userInfo.email) {
             alert("You must log in or register to book a room.");
-            window.location.href = "room.html"; 
             return;
         }
 
