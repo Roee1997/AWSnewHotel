@@ -38,7 +38,7 @@ async function fetchAndDisplayRooms() {
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item shadow rounded overflow-hidden">
                         <div class="position-relative">
-                            <img class="img-fluid" src="img/room-placeholder.jpg" alt="${room.RoomType}">
+                            <img class="img-fluid" src="img/room-1.jpg" alt="${room.RoomType}">
                             <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$${room.PricePerNight}/Night</small>
                         </div>
                         <div class="p-4 mt-2">
