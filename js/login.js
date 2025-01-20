@@ -94,47 +94,55 @@ const updateUI = () => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const authContainer = document.getElementById('authContainer');
 
-    if (userInfo) {
-        // User is logged in
-        authContainer.innerHTML = `
-            <div class="navbar-nav ms-auto">
-                <span class="nav-item nav-link text-white">Welcome, ${userInfo.username}</span>
-                <button id="logoutButton" class="btn btn-primary nav-item nav-link text-white">Logout</button>
-            </div>
-        `;
+    // Clear previous content in authContainer
+    authContainer.innerHTML = '';
 
-        // Attach logout event after rendering
-        const logoutButton = document.getElementById('logoutButton');
-        if (logoutButton) {
-            logoutButton.addEventListener('click', logoutUser);
-        }
+    if (userInfo) {
+        // Add welcome message
+        const welcomeMessage = document.createElement('span');
+        welcomeMessage.textContent = `Welcome, ${userInfo.username}`;
+        welcomeMessage.classList.add('nav-item', 'nav-link', 'text-white');
+        authContainer.appendChild(welcomeMessage);
 
         // Add admin-specific UI if the user is an admin
         if (userInfo.isAdmin) {
             const adminLink = document.createElement('a');
             adminLink.href = 'admin.html';
             adminLink.textContent = 'Admin Dashboard';
-            adminLink.classList.add('nav-item', 'nav-link', 'text-white');
+            adminLink.classList.add('nav-item', 'nav-link', 'text-orange');
+
+            // Highlight the Admin Dashboard link if on the admin page
+            if (window.location.pathname.includes('admin.html')) {
+                adminLink.style.color = 'orange'; // Change text color to orange
+                adminLink.style.fontWeight = 'bold'; // Optional: Make it bold
+            }
+
             authContainer.appendChild(adminLink);
         }
+
+        // Add logout button
+        const logoutButton = document.createElement('button');
+        logoutButton.id = 'logoutButton';
+        logoutButton.textContent = 'Logout';
+        logoutButton.classList.add('btn', 'btn-primary', 'nav-item', 'nav-link', 'text-white');
+        logoutButton.addEventListener('click', logoutUser);
+        authContainer.appendChild(logoutButton);
     } else {
         // User is not logged in
-        authContainer.innerHTML = `
-            <div class="navbar-nav ms-auto">
-                <button id="loginButton" class="btn btn-primary nav-item nav-link text-white">Login</button>
-            </div>
-        `;
-
-        // Attach login event after rendering
-        const loginButton = document.getElementById('loginButton');
-        if (loginButton) {
-            loginButton.addEventListener('click', redirectToCognitoLogin);
-        }
+        const loginButton = document.createElement('button');
+        loginButton.id = 'loginButton';
+        loginButton.textContent = 'Login';
+        loginButton.classList.add('btn', 'btn-primary', 'nav-item', 'nav-link', 'text-white');
+        loginButton.addEventListener('click', redirectToCognitoLogin);
+        authContainer.appendChild(loginButton);
     }
 };
 
-// Parse tokens on page load
+// Run `updateUI` on page load
 window.onload = () => {
     parseTokensFromUrl();
     updateUI();
 };
+
+
+
