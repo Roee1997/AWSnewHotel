@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userEmail = getUserEmailFromStorage(); // Retrieve user email from localStorage or sessionStorage
     if (!userEmail) {
         alert("User email not found. Please log in.");
+        window.location.href = "room.html"; 
         return;
     }
 

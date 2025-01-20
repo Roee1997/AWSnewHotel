@@ -1,5 +1,13 @@
 document.addEventListener("click", (e) => {
     if (e.target.classList.contains("book-now")) {
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+        // בדיקת חיבור המשתמש
+        if (!userInfo || !userInfo.email) {
+            alert("You must log in or register to book a room.");
+            return;
+        }
+
         const roomId = e.target.getAttribute("data-room-id");
         const roomType = e.target.getAttribute("data-room-type");
         const price = e.target.getAttribute("data-price");
@@ -24,10 +32,10 @@ document.addEventListener("click", (e) => {
             numberOfGuests,
         };
 
-        // Save booking details to localStorage
+        // שמירת פרטי ההזמנה ל-localStorage
         localStorage.setItem("bookingDetails", JSON.stringify(bookingDetails));
 
-        // Redirect to booking.html
+        // הפניה ל-booking.html
         window.location.href = "booking.html";
     }
 });
