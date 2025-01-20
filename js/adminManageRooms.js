@@ -2,13 +2,57 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const roomsApiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    const uploadImageAPI = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/postAdminUploadRoomImage";
 
-    // Fetch and display existing rooms
     fetchAndDisplayRooms(roomsApiUrl);
 
-    // Add event listener to the Save button in the modal
     document.getElementById("saveRoomButton").addEventListener("click", handleRoomAdd);
+
+    // מאזינים לכפתורי ההעלאה
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('upload-btn')) {
+            const roomId = event.target.getAttribute('data-room-id');
+            document.getElementById(`upload-image-${roomId}`).click();
+        }
+    });
+
+    // מאזינים לבחירת הקובץ
+    document.addEventListener('change', async function (event) {
+        if (event.target.type === 'file' && event.target.id.startsWith('upload-image-')) {
+            const roomId = event.target.id.split('-')[2];
+            const file = event.target.files[0];
+            if (file) {
+                await uploadRoomImage(roomId, file);
+            }
+        }
+    });
 });
+
+// העלת תמונות
+async function uploadRoomImage(roomId, file) {
+    const formData = new FormData();
+    formData.append("room_id", roomId);
+    formData.append("image", file);
+
+    try {
+        const response = await fetch("https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/postAdminUploadRoomImage", {
+            method: "POST",
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`Upload failed! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        alert("Image uploaded successfully!");
+
+        // ניתן לעדכן את ממשק המשתמש כדי להציג את התמונה החדשה
+    } catch (error) {
+        console.error("Error uploading image:", error);
+        alert("Failed to upload image. Please try again.");
+    }
+}
 
 // Fetch and display existing rooms in the table
 async function fetchAndDisplayRooms(apiUrl) {
@@ -45,6 +89,8 @@ function roomToTableRow(room) {
             <td>
                 <button class="btn btn-primary btn-sm" onclick="openRoomModal('edit', ${room.room_id})">Edit</button>
                 <button class="btn btn-danger btn-sm" onclick="handleRoomDelete(${room.room_id})">Delete</button>
+                <input type="file" id="upload-image-${room.room_id}" class="d-none" accept="image/*">
+                <button class="btn btn-secondary btn-sm upload-btn" data-room-id="${room.room_id}">Upload Image</button>
             </td>
         </tr>
     `;
