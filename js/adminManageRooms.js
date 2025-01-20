@@ -150,7 +150,7 @@ function openRoomModal(action, roomId = null) {
         newSaveButton.onclick = handleRoomAdd; // Bind to handleRoomAdd
     } else if (action === "edit") {
         modalTitle.textContent = "Edit Room";
-        form.room_id.disabled = false;
+        form.room_id.disabled = true;
         fetchRoomDetails(roomId); // Load the room details into the form
         newSaveButton.onclick = () => handleRoomEdit(roomId); // Bind to handleRoomEdit
     }
