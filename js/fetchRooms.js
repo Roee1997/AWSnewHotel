@@ -47,7 +47,6 @@ async function fetchAndDisplayRooms() {
                                     Book Now
                                 </button>
                                 <input type="file" id="upload-image-${room.room_id}" class="d-none" accept="image/*">
-                                <button class="btn btn-sm btn-secondary upload-btn" data-room-id="${room.room_id}">Upload Image</button>
                             </div>
                         </div>
                     </div>
