@@ -1,28 +1,43 @@
-// כתובת ה-API
+// API URLs
 const apiURL = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev";
 const uploadImageAPI = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/postAdminUploadRoomImage";
 
-// אלמנט שמכיל את כרטיסי החדרים
+// Element that contains the room cards
 const roomsContainer = document.querySelector(".container-xxl.py-5 .row.g-4");
 
-// פונקציה לשליפת והצגת החדרים
+// Function to fetch and display rooms
 async function fetchAndDisplayRooms() {
     try {
+        console.log("Fetching rooms from API...");
         const response = await fetch(apiURL);
 
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            const errorBody = await response.text();
+            throw new Error(`HTTP error! Status: ${response.status}, Details: ${errorBody}`);
         }
 
-        const { body } = await response.json();
-        const rooms = body;
+        const data = await response.json();
+        const rooms = JSON.parse(data.body);  // Parsing the JSON string returned in the body
 
-        const numberOfGuests = parseInt(localStorage.getItem("numberOfGuests"), 10);
+        console.log("Rooms data received:", rooms);
+
+        // Get number of guests from localStorage (default to 1 if not found)
+        const numberOfGuests = parseInt(localStorage.getItem("numberOfGuests"), 10) || 1;
         const filteredRooms = rooms.filter(room => room.MaxGuests >= numberOfGuests);
 
         roomsContainer.innerHTML = "";
 
+        if (filteredRooms.length === 0) {
+            roomsContainer.innerHTML = "<p class='text-warning'>No rooms available for the selected number of guests.</p>";
+            return;
+        }
+
         filteredRooms.forEach((room) => {
+            console.log(`Processing room ID: ${room.room_id}`);
+
+            // Use room's image if available, otherwise use the default image
+            const imageUrl = room.ImageURL ? room.ImageURL : "img/room-1.jpg";
+
             const amenitiesList = room.Amenities.map(
                 (amenity) => `<li>${amenity}</li>`
             ).join("");
@@ -31,7 +46,7 @@ async function fetchAndDisplayRooms() {
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item shadow rounded overflow-hidden">
                         <div class="position-relative">
-                            <img class="img-fluid" src="img/room-1.jpg" alt="${room.RoomType}" id="room-img-${room.room_id}">
+                            <img class="img-fluid" src="${imageUrl}" alt="${room.RoomType}" id="room-img-${room.room_id}">
                             <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$${room.PricePerNight}/Night</small>
                         </div>
                         <div class="p-4 mt-2">
@@ -54,18 +69,11 @@ async function fetchAndDisplayRooms() {
             roomsContainer.innerHTML += roomCard;
         });
 
-        if (filteredRooms.length === 0) {
-            roomsContainer.innerHTML = "<p class='text-warning'>No rooms available for the selected number of guests.</p>";
-        }
-
-
-
     } catch (error) {
         console.error("Error fetching rooms:", error);
         roomsContainer.innerHTML = "<p class='text-danger'>Failed to load rooms. Please try again later.</p>";
     }
 }
 
-
-// קריאה לפונקציה
+// Call the function to fetch and display rooms
 fetchAndDisplayRooms();

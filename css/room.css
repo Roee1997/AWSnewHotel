@@ -24,3 +24,10 @@
 .container-fluid.page-header-inner.py-5 {
     margin-bottom: 150px; /* הרווח הרצוי */
 }
+
+.room-item img {
+    width: 100%; /* התאמת רוחב התמונה לרוחב המיכל */
+    height: 250px; /* גובה קבוע לתמונות */
+    object-fit: cover; /* חיתוך התמונה כדי להתאים למסגרת ולשמור על פרופורציות */
+    border-radius: 10px; /* פינות מעוגלות (לפי צורך) */
+}
