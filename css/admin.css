@@ -1,6 +1,11 @@
-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-border-radius: 8px;
-overflow: hidden;
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .table th,
