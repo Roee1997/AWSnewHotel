@@ -44,6 +44,9 @@ function roomToTableRow(room) {
             <td>
                 <button class="btn btn-primary btn-sm" onclick="openRoomModal('edit', ${room.room_id})">Edit</button>
                 <button class="btn btn-danger btn-sm" onclick="handleRoomDelete(${room.room_id})">Delete</button>
+                <button class="btn btn-warning btn-sm upload-image-btn" data-room-id="${room.room_id}">
+                    Upload Image
+                </button>
             </td>
         </tr>
     `;
