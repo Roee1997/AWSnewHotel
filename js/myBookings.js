@@ -1,8 +1,9 @@
+// Run when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    const userEmail = getUserEmailFromStorage(); // Retrieve user email from localStorage or sessionStorage
+    const userEmail = getUserEmailFromStorage();
     if (!userEmail) {
         alert("User email not found. Please log in.");
-        window.location.href = "room.html"; 
+        window.location.href = "room.html";
         return;
     }
 
@@ -26,6 +27,8 @@ async function fetchAndDisplayBookings(userEmail) {
     const bookingCardsContainer = document.getElementById('bookingCardsContainer');
 
     try {
+        console.log("Fetching bookings for user:", userEmail);
+
         // Fetch bookings from API
         const response = await fetch(`${bookingsApi}?user_email=${userEmail}`);
         if (!response.ok) {
@@ -33,24 +36,25 @@ async function fetchAndDisplayBookings(userEmail) {
         }
 
         const data = await response.json();
+        console.log("Bookings data received:", data);
+
         const bookings = data.bookings || [];
         const rooms = data.rooms || [];
 
-        // Check if there are any bookings
         if (bookings.length === 0) {
             bookingCardsContainer.innerHTML = `<p class="text-warning">No bookings found for your email.</p>`;
             return;
         }
 
-        // Clear existing content
         bookingCardsContainer.innerHTML = "";
 
-        // Display bookings
+        // Process each booking and display it
         bookings.forEach(booking => {
             const room = rooms.find(r => r.room_id === parseInt(booking.room_id));
             const bookingCard = createBookingCard(booking, room);
             bookingCardsContainer.appendChild(bookingCard);
         });
+
     } catch (error) {
         console.error("Error fetching bookings or rooms:", error);
         bookingCardsContainer.innerHTML = `<p class="text-danger">Failed to load bookings. Please try again later.</p>`;
@@ -62,14 +66,16 @@ function createBookingCard(booking, room) {
     const cardDiv = document.createElement("div");
     cardDiv.className = "col-lg-4 col-md-6";
 
-    const roomImage = room ? `img/room-placeholder.jpg` : `img/no-image.jpg`;
+    // Use the room image from API if available, otherwise use the default image
+    const roomImage = room && room.ImageURL ? room.ImageURL : "img/room-1.jpg";
     const roomPrice = room ? `$${room.PricePerNight}/Night` : "Price unavailable";
     const roomDescription = room ? room.Description : "Room description unavailable";
 
     cardDiv.innerHTML = `
         <div class="room-item shadow rounded overflow-hidden">
             <div class="position-relative">
-                <img class="img-fluid" src="${roomImage}" alt="${room?.RoomType || "No room info"}">
+                <img class="img-fluid" src="${roomImage}" alt="${room?.RoomType || "No room info"}" 
+                    style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px;">
                 <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">${roomPrice}</small>
             </div>
             <div class="p-4 mt-2">
