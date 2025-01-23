@@ -28,14 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Debugging response
-            console.log('Response Status:', response.status);
-            console.log('Response Headers:', response.headers);
             const result = await response.text();
-            console.log('Response Body:', result);
 
             // Check response status
             if (response.ok) {
-                alert(`Booking successful! Response: ${result}`);
+                alert(`Booking successful! Redirecting to My Bookings...`, "success");
+                setTimeout(() => {
+                    localStorage.removeItem('bookingDetails');  // ניקוי המידע
+                    window.location.href = "myBookings.html";
+                }, 3500);
             } else {
                 alert(`Failed to create booking. Status: ${response.status}, Response: ${result}`);
             }

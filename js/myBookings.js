@@ -81,7 +81,8 @@ function createBookingCard(booking, room) {
             <div class="p-4 mt-2">
                 <h5 class="mb-0">${room?.RoomType || "Unknown Room"}</h5>
                 <p class="text-body mb-3">${roomDescription}</p>
-                <p><strong>Booking ID:</strong> ${booking.booking_id}</p>
+                <p><strong>Booking ID:<strong> ${booking.booking_id}</p>
+                <p class="text-secondary mb-2"><strong>Room ID: ${room.room_id} | Max Guests: ${room.MaxGuests}</p><br/>
                 <p><strong>Guest:</strong> ${booking.user_name} (${booking.user_email})</p>
                 <p><strong>Check-In:</strong> ${booking.check_in}</p>
                 <p><strong>Check-Out:</strong> ${booking.check_out}</p>

@@ -27,14 +27,9 @@ async function fetchAndDisplayRooms(apiUrl) {
         if (!response.ok) {
             throw new Error(`Error fetching rooms: ${response.status}`);
         }
-
         const data = await response.json();
         const rooms = JSON.parse(data.body) || [];
         rooms.sort((a, b) => a.room_id - b.room_id); // Ensure sorting
-        console.log("Raw rooms data:", rooms); // בדיקת המידע הגולמי
-        rooms.forEach(room => {
-            console.log(`Room ${room.room_id} ImageURL:`, room.ImageURL); // בדיקת URL לכל חדר
-        });
         roomsTableBody.innerHTML = rooms.length
             ? rooms.map(roomToTableRow).join("")
             : "<tr><td colspan='8'>No rooms available.</td></tr>";
@@ -46,11 +41,8 @@ async function fetchAndDisplayRooms(apiUrl) {
 
 // Convert room data to a table row
 function roomToTableRow(room) {
-    console.log(`Processing room ID: ${room.room_id}`);
-
     // Use room's image URL if available, otherwise show a default image
     const roomImage = room.ImageURL ? room.ImageURL : "img/room-1.jpg";
-    console.log(`Room ${room.room_id} image:`, roomImage); // דיבוג
     return `
         <tr>
             <td>${room.room_id || "N/A"}</td>
@@ -75,7 +67,6 @@ function roomToTableRow(room) {
 
 // Handle image upload for a specific room
 function handleImageUpload(roomId) {
-    console.log("Handling image upload for room:", roomId);
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/*";

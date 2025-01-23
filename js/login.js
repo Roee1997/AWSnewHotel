@@ -18,9 +18,6 @@ const logoutUser = () => {
     localStorage.removeItem('userInfo'); // Remove the userInfo object
     localStorage.clear(); // Optionally clear all storage if it's only for this app
 
-    // Log for debugging
-    console.log('All user-related data removed from localStorage.');
-
     // Show confirmation and reload page
     alert('You have been logged out.');
     location.reload(); // Reload the page to update UI
@@ -76,7 +73,6 @@ const parseTokensFromUrl = () => {
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
             // Log user info to the console
-            console.log('User Info:', userInfo);
             alert('Login successful!');
             
             // Clear the hash to prevent reprocessing on reload
