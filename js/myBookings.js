@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function getUserEmailFromStorage() {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if (userInfo && userInfo.email) {
-        console.log(`Retrieved user email: ${userInfo.email}`);
         return userInfo.email;
     }
     console.error("User email not found in localStorage.");
@@ -27,8 +26,6 @@ async function fetchAndDisplayBookings(userEmail) {
     const bookingCardsContainer = document.getElementById('bookingCardsContainer');
 
     try {
-        console.log("Fetching bookings for user:", userEmail);
-
         // Fetch bookings from API
         const response = await fetch(`${bookingsApi}?user_email=${userEmail}`);
         if (!response.ok) {
@@ -36,8 +33,6 @@ async function fetchAndDisplayBookings(userEmail) {
         }
 
         const data = await response.json();
-        console.log("Bookings data received:", data);
-
         const bookings = data.bookings || [];
         const rooms = data.rooms || [];
 
