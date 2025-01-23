@@ -3,10 +3,19 @@
 document.addEventListener("DOMContentLoaded", () => {
     const roomsApiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
 
+    // Fetch and display rooms when the page loads
     fetchAndDisplayRooms(roomsApiUrl);
 
+    // Add event listener for saving room
     document.getElementById("saveRoomButton").addEventListener("click", handleRoomAdd);
 
+    // Add event listener for uploading room images
+    document.querySelector("#roomsTable").addEventListener("click", function (event) {
+        if (event.target.classList.contains("upload-image-btn")) {
+            const roomId = event.target.getAttribute("data-room-id");
+            handleImageUpload(roomId);
+        }
+    });
 });
 
 // Fetch and display existing rooms in the table
@@ -22,17 +31,26 @@ async function fetchAndDisplayRooms(apiUrl) {
         const data = await response.json();
         const rooms = JSON.parse(data.body) || [];
         rooms.sort((a, b) => a.room_id - b.room_id); // Ensure sorting
+        console.log("Raw rooms data:", rooms); // בדיקת המידע הגולמי
+        rooms.forEach(room => {
+            console.log(`Room ${room.room_id} ImageURL:`, room.ImageURL); // בדיקת URL לכל חדר
+        });
         roomsTableBody.innerHTML = rooms.length
             ? rooms.map(roomToTableRow).join("")
-            : "<tr><td colspan='7'>No rooms available.</td></tr>";
+            : "<tr><td colspan='8'>No rooms available.</td></tr>";
     } catch (error) {
         console.error("Error fetching or displaying rooms:", error);
-        roomsTableBody.innerHTML = "<tr><td colspan='7'>Failed to load rooms.</td></tr>";
+        roomsTableBody.innerHTML = "<tr><td colspan='8'>Failed to load rooms.</td></tr>";
     }
 }
 
 // Convert room data to a table row
 function roomToTableRow(room) {
+    console.log(`Processing room ID: ${room.room_id}`);
+
+    // Use room's image URL if available, otherwise show a default image
+    const roomImage = room.ImageURL ? room.ImageURL : "img/room-1.jpg";
+    console.log(`Room ${room.room_id} image:`, roomImage); // דיבוג
     return `
         <tr>
             <td>${room.room_id || "N/A"}</td>
@@ -41,28 +59,95 @@ function roomToTableRow(room) {
             <td>${room.PricePerNight || "N/A"}</td>
             <td>${room.MaxGuests || "N/A"}</td>
             <td>${room.Available ? "Yes" : "No"}</td>
+           <td>
+                <img src="${roomImage}" alt="Room ${room.room_id}" 
+                     style="width: 100px; height: 75px; object-fit: cover; border-radius: 5px;"
+                     onerror="this.src='img/room-1.jpg'">
+                <button class="btn btn-success btn-sm upload-image-btn" data-room-id="${room.room_id}">Upload Image</button>
+            </td>
             <td>
                 <button class="btn btn-primary btn-sm" onclick="openRoomModal('edit', ${room.room_id})">Edit</button>
                 <button class="btn btn-danger btn-sm" onclick="handleRoomDelete(${room.room_id})">Delete</button>
-                <button class="btn btn-warning btn-sm upload-image-btn" data-room-id="${room.room_id}">
-                    Upload Image
-                </button>
             </td>
         </tr>
     `;
 }
+
+// Handle image upload for a specific room
+function handleImageUpload(roomId) {
+    console.log("Handling image upload for room:", roomId);
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+
+    input.addEventListener("change", async function () {
+        if (input.files.length > 0) {
+            const reader = new FileReader();
+            reader.onload = async function (e) {
+                try {
+                    const base64Image = e.target.result.split(",")[1]; // Extract base64 part
+                    const payload = {
+                        room_id: roomId,
+                        image: `data:image/jpeg;base64,${base64Image}`
+                    };
+
+                    const response = await fetch("https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/postAdminUploadRoomImage", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            body: JSON.stringify(payload)
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.statusCode === 200) {
+                        alert("Image uploaded successfully!");
+                        // Update image in the table
+                        const imageElement = document.querySelector(`button[data-room-id="${roomId}"]`).closest("tr").querySelector("img");
+                        if (imageElement) {
+                            imageElement.src = e.target.result;
+                        }
+                        // Refresh the rooms table
+                        await fetchAndDisplayRooms("https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table");
+                    } else {
+                        throw new Error(result.body || 'Upload failed');
+                    }
+                } catch (error) {
+                    console.error("Error uploading image:", error);
+                    alert("Failed to upload image: " + error.message);
+                }
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+
+    input.click();
+}
+
+// [Rest of your existing code for handleRoomAdd, handleRoomEdit, handleRoomDelete, etc.]
 
 // Show/hide loading state in the modal
 function showLoading(show) {
     const saveButton = document.getElementById("saveRoomButton");
     if (show) {
         saveButton.disabled = true;
-        saveButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
+        saveButton.innerHTML =
+            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
     } else {
         saveButton.disabled = false;
-        saveButton.innerHTML = 'Save Room';
+        saveButton.innerHTML = "Save Room";
     }
 }
+
+// Rest of the CRUD functions remain unchanged (handleRoomAdd, handleRoomEdit, handleRoomDelete)
+
 
 // Validate room data
 function validateRoomData(data) {
