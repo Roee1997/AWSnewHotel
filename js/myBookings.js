@@ -3,8 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const userEmail = getUserEmailFromStorage();
     if (!userEmail) {
         alert("User email not found. Please log in.");
-        window.location.href = "room.html";
-        return;
+        setTimeout(() => {
+            window.location.href = "index.html";
+            return;
+        }, 4000);
     }
 
     fetchAndDisplayBookings(userEmail);

@@ -75,7 +75,7 @@ class CustomAlert {
         }
     }
 
-    show(message, type = 'success', duration = 3000) {
+    show(message, type = 'success', duration = 4000) {
         const container = document.getElementById('customAlertContainer');
         const alert = document.createElement('div');
         alert.className = `custom-alert ${type}`;
