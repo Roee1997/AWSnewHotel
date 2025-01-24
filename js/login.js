@@ -1,6 +1,6 @@
 // Cognito Login URL
 const cognitoLoginUrl =
-    'https://us-east-1u8diopodh.auth.us-east-1.amazoncognito.com/login?client_id=1hfg4usrg0a6lr0393nmnia1vq&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A5501%2Findex.html';
+    'https://us-east-1u8diopodh.auth.us-east-1.amazoncognito.com/login?client_id=1hfg4usrg0a6lr0393nmnia1vq&response_type=token&redirect_uri=https%3A%2F%2Fmynewhotelonthelake.s3.us-east-1.amazonaws.com%2Findex.html';
 
 /**
  * Redirect user to Cognito login page
