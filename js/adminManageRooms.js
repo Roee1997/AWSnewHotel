@@ -82,7 +82,7 @@ function handleImageUpload(roomId) {
                         image: `data:image/jpeg;base64,${base64Image}`
                     };
 
-                    const response = await fetch("https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/postAdminUploadRoomImage", {
+                    const response = await fetch("https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/postAdminUploadRoomImage", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -106,7 +106,7 @@ function handleImageUpload(roomId) {
                             imageElement.src = e.target.result;
                         }
                         // Refresh the rooms table
-                        await fetchAndDisplayRooms("https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table");
+                        await fetchAndDisplayRooms("https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table");
                     } else {
                         throw new Error(result.body || 'Upload failed');
                     }
@@ -194,7 +194,7 @@ function openRoomModal(action, roomId = null) {
 // Fetch room details for editing
 async function fetchRoomDetails(roomId) {
     try {
-        const apiUrl = `https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table`;
+        const apiUrl = `https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table`;
         
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -229,7 +229,7 @@ async function fetchRoomDetails(roomId) {
 async function handleRoomAdd() {
     showLoading(true);
     
-    const apiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    const apiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
     const form = document.getElementById("roomForm");
 
     try {
@@ -286,7 +286,7 @@ async function handleRoomEdit(roomId) {
 
     showLoading(true);
 
-    const apiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    const apiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
     const form = document.getElementById("roomForm");
 
     try {
@@ -343,8 +343,7 @@ async function handleRoomDelete(roomId) {
     if (!confirm(`Are you sure you want to delete the room with ID: ${roomId}?`)) {
         return;
     }
-
-    const apiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    const apiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
 
     try {
 

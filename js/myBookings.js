@@ -24,7 +24,7 @@ function getUserEmailFromStorage() {
 
 // Fetch and display bookings
 async function fetchAndDisplayBookings(userEmail) {
-    const bookingsApi = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/myBookings";
+    const bookingsApi = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/myBookings";
     const bookingCardsContainer = document.getElementById('bookingCardsContainer');
 
     try {

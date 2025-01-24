@@ -77,8 +77,8 @@ function populateTable(bookings) {
 
 
 function updateBookingStatus(userEmail, bookingId, newStatus, roomId) {
-    const updateStatusUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/updating-status";
-    const updateAvailabilityUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/update-room-availability";
+    const updateStatusUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/updating-status";
+    const updateAvailabilityUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/update-room-availability";
 
     // Prepare the payload for status update
     const statusPayload = {
