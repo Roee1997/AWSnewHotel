@@ -13,16 +13,7 @@ document.addEventListener("click", async (e) => {
         const maxGuests = e.target.getAttribute("data-max-guests");
         const email = userInfo.email;
 
-        // בדיקה אם קיימת הזמנה
         try {
-            const checkResponse = await fetch(`https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/checkIfBookingExistsForClient?email=${encodeURIComponent(email)}&room_id=${encodeURIComponent(roomId)}`);
-            const checkResult = await checkResponse.json();
-
-            if (checkResult.exists) {
-                alert("You already have a booking for this room. Please check 'My Bookings' page.", "error");
-                return;
-            }
-
             const checkInDate = localStorage.getItem("checkInDate");
             const checkOutDate = localStorage.getItem("checkOutDate");
             const numberOfGuests = localStorage.getItem("numberOfGuests");
