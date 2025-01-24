@@ -1,7 +1,7 @@
 //////////////////////////////// Script for managing rooms table in admin panel ////////////////////////////////
 
 document.addEventListener("DOMContentLoaded", () => {
-    const roomsApiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    const roomsApiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
 
     // Fetch and display rooms when the page loads
     fetchAndDisplayRooms(roomsApiUrl);

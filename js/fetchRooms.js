@@ -1,5 +1,5 @@
 // API URLs
-const apiURL = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev";
+const apiURL = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev";
 const uploadImageAPI = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/Admin/postAdminUploadRoomImage";
 
 // Element that contains the room cards

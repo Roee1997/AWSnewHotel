@@ -1,6 +1,6 @@
 // from here on this part of script works on table bookings:
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = "https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/bookings"; // URL of the Lambda API
+    const apiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/bookings"; // URL of the Lambda API
     // Fetch bookings from the API
     fetchBookings(apiUrl);
 });

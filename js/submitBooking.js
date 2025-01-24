@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Call the API to insert the booking into DynamoDB
         try {
-            const response = await fetch('https://lb15wqqox4.execute-api.us-east-1.amazonaws.com/dev/bookings', {
+            const response = await fetch('https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/bookings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
