@@ -1,5 +1,10 @@
+// API Configuration variables
+const apiId = "nnj277q1qd"; // The unique API Gateway ID
+const apiRegion = "us-east-1"; // AWS region where the API is deployed
+
 // API URLs
-const apiURL = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev";
+
+const apiURL = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev`;
 
 // Element that contains the room cards
 const roomsContainer = document.querySelector(".container-xxl.py-5 .row.g-4");

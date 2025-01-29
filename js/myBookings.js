@@ -1,5 +1,6 @@
 // Run when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
+
     const userEmail = getUserEmailFromStorage();
     if (!userEmail) {
         alert("User email not found. Please log in.");
@@ -24,7 +25,10 @@ function getUserEmailFromStorage() {
 
 // Fetch and display bookings
 async function fetchAndDisplayBookings(userEmail) {
-    const bookingsApi = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/myBookings";
+    // API Configuration variables
+    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+    const apiRegion = "us-east-1"; // AWS region where the API is deployed
+    const bookingsApi = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/myBookings`;
     const bookingCardsContainer = document.getElementById('bookingCardsContainer');
 
     try {

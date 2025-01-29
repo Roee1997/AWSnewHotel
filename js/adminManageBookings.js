@@ -1,6 +1,9 @@
 // from here on this part of script works on table bookings:
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/bookings"; // URL of the Lambda API
+    // API Configuration variables
+    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+    const apiRegion = "us-east-1"; // AWS region where the API is deployed
+    const apiUrl = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/bookings`; // URL of the Lambda API
     // Fetch bookings from the API
     fetchBookings(apiUrl);
 });
@@ -77,8 +80,11 @@ function populateTable(bookings) {
 
 
 function updateBookingStatus(userEmail, bookingId, newStatus, roomId) {
-    const updateStatusUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/updating-status";
-    const updateAvailabilityUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/update-room-availability";
+    // API Configuration variables
+    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+    const apiRegion = "us-east-1"; // AWS region where the API is deployed
+    const updateStatusUrl = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/updating-status`;
+    const updateAvailabilityUrl = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/update-room-availability`;
 
     // Prepare the payload for status update
     const statusPayload = {

@@ -1,6 +1,17 @@
-// Cognito Login URL
-const cognitoLoginUrl =
-    'https://us-east-1u8diopodh.auth.us-east-1.amazoncognito.com/login?client_id=1hfg4usrg0a6lr0393nmnia1vq&response_type=token&redirect_uri=https%3A%2F%2Fmynewhotelonthelake.s3.us-east-1.amazonaws.com%2Findex.html';
+// Cognito configuration variables
+const cognitoRegion = "us-east-1"; // AWS region where Cognito is deployed
+const cognitoDomainPrefix = "u8diopodh"; // Cognito domain prefix (User Pool domain)
+const clientId = "1hfg4usrg0a6lr0393nmnia1vq"; // Cognito App Client ID
+const responseType = "token"; // Authentication flow type
+
+// Construct the Cognito domain dynamically
+const cognitoDomain = `https://${cognitoRegion}${cognitoDomainPrefix}.auth.${cognitoRegion}.amazoncognito.com`;
+
+// Redirect URL (must match allowed callback URLs in Cognito settings)
+const redirectUri = `https://mynewhotelonthelake.s3.${cognitoRegion}.amazonaws.com/index.html`;
+
+// Construct Cognito Login URL dynamically
+const cognitoLoginUrl = `${cognitoDomain}/login?client_id=${clientId}&response_type=${responseType}&redirect_uri=${encodeURIComponent(redirectUri)}`;
 
 /**
  * Redirect user to Cognito login page
@@ -8,6 +19,8 @@ const cognitoLoginUrl =
 const redirectToCognitoLogin = () => {
     window.location.href = cognitoLoginUrl;
 };
+
+
 
 /**
  * Logout user

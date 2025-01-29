@@ -1,7 +1,10 @@
 //////////////////////////////// Script for managing rooms table in admin panel ////////////////////////////////
 
 document.addEventListener("DOMContentLoaded", () => {
-    const roomsApiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    // API Configuration variables
+    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+    const apiRegion = "us-east-1"; // AWS region where the API is deployed
+    const roomsApiUrl = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/Rooms-Table`;
 
     // Fetch and display rooms when the page loads
     fetchAndDisplayRooms(roomsApiUrl);
@@ -81,8 +84,10 @@ function handleImageUpload(roomId) {
                         room_id: roomId,
                         image: `data:image/jpeg;base64,${base64Image}`
                     };
-
-                    const response = await fetch("https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/postAdminUploadRoomImage", {
+                    // API Configuration variables
+                    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+                    const apiRegion = "us-east-1"; // AWS region where the API is deployed
+                    const response = await fetch(`https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/postAdminUploadRoomImage`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -97,7 +102,7 @@ function handleImageUpload(roomId) {
                     }
 
                     const result = await response.json();
-                    
+
                     if (result.statusCode === 200) {
                         alert("Image uploaded successfully!");
                         // Update image in the table
@@ -106,7 +111,8 @@ function handleImageUpload(roomId) {
                             imageElement.src = e.target.result;
                         }
                         // Refresh the rooms table
-                        await fetchAndDisplayRooms("https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table");
+
+                        await fetchAndDisplayRooms(`https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/Rooms-Table`);
                     } else {
                         throw new Error(result.body || 'Upload failed');
                     }
@@ -194,8 +200,11 @@ function openRoomModal(action, roomId = null) {
 // Fetch room details for editing
 async function fetchRoomDetails(roomId) {
     try {
-        const apiUrl = `https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table`;
-        
+        // API Configuration variables
+        const apiId = "nnj277q1qd"; // The unique API Gateway ID
+        const apiRegion = "us-east-1"; // AWS region where the API is deployed
+        const apiUrl = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/Rooms-Table`;
+
         const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error(`Error fetching room details: ${response.status}`);
@@ -210,7 +219,7 @@ async function fetchRoomDetails(roomId) {
         }
 
         const form = document.getElementById("roomForm");
-        
+
         // Fill form with room data
         form.room_id.value = room.room_id;
         form.RoomType.value = room.RoomType;
@@ -228,8 +237,10 @@ async function fetchRoomDetails(roomId) {
 // Handle room addition
 async function handleRoomAdd() {
     showLoading(true);
-    
-    const apiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    // API Configuration variables
+    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+    const apiRegion = "us-east-1"; // AWS region where the API is deployed
+    const apiUrl = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/Rooms-Table`;
     const form = document.getElementById("roomForm");
 
     try {
@@ -285,8 +296,10 @@ async function handleRoomEdit(roomId) {
     }
 
     showLoading(true);
-
-    const apiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    // API Configuration variables
+    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+    const apiRegion = "us-east-1"; // AWS region where the API is deployed
+    const apiUrl = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/Rooms-Table`;
     const form = document.getElementById("roomForm");
 
     try {
@@ -343,7 +356,10 @@ async function handleRoomDelete(roomId) {
     if (!confirm(`Are you sure you want to delete the room with ID: ${roomId}?`)) {
         return;
     }
-    const apiUrl = "https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/Admin/Rooms-Table";
+    // API Configuration variables
+    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+    const apiRegion = "us-east-1"; // AWS region where the API is deployed
+    const apiUrl = `https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/Admin/Rooms-Table`;
 
     try {
 

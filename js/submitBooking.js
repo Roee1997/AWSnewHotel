@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // API Configuration variables
+    const apiId = "nnj277q1qd"; // The unique API Gateway ID
+    const apiRegion = "us-east-1"; // AWS region where the API is deployed
     // Listen for form submission
     document.querySelector('form').addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent default form submission
@@ -19,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Call the API to insert the booking into DynamoDB
         try {
-            const response = await fetch('https://nnj277q1qd.execute-api.us-east-1.amazonaws.com/dev/bookings', {
+            const response = await fetch(`https://${apiId}.execute-api.${apiRegion}.amazonaws.com/dev/bookings`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
